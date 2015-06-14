@@ -1,13 +1,14 @@
 package controllers;
 
 import static play.data.Form.form;
+
+import com.google.gson.Gson;
+
 import models.FormGcm;
 import play.data.DynamicForm;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.*;
-
-import com.google.gson.Gson;
 
 public class GCM extends Controller {
 
