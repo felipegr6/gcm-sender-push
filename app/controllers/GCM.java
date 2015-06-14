@@ -1,11 +1,13 @@
 package controllers;
 
-import play.Logger;
-import play.data.DynamicForm;
-import play.mvc.Result;
-import play.mvc.Controller;
-import views.html.*;
 import static play.data.Form.form;
+import models.FormGcm;
+import play.data.DynamicForm;
+import play.mvc.Controller;
+import play.mvc.Result;
+import views.html.*;
+
+import com.google.gson.Gson;
 
 public class GCM extends Controller {
 
@@ -17,9 +19,11 @@ public class GCM extends Controller {
 
 		DynamicForm dynamicForm = form().bindFromRequest();
 
-		Logger.info(dynamicForm.get("api_key"));
+		FormGcm gcm = new FormGcm(dynamicForm.get("api_key"),
+				dynamicForm.get("reg_id"), dynamicForm.get("titulo"),
+				dynamicForm.get("mensagem"));
 
-		return ok(dynamicForm.get("api_key"));
+		return ok(new Gson().toJson(gcm));
 
 	}
 
