@@ -48,7 +48,7 @@
 				var message = $("#mensagem").val();
 
 				// Send the data using post
-				var posting = $.post('SenderGcmServlet', {
+				var posting = $.post('@routes.GCM.submit()', {
 					api_key : key,
 					reg_id : reg,
 					titulo : title,
