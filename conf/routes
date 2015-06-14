@@ -9,4 +9,4 @@ GET		/							controllers.GCM.index()
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
 # Sobre
-GET		/sobre						controllers.Application.sobre()
+# GET		/sobre						controllers.Application.sobre()
