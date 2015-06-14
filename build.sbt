@@ -17,3 +17,4 @@ libraryDependencies ++= Seq(
 routesGenerator := InjectedRoutesGenerator
 
 libraryDependencies += "com.google.code.gson" % "gson" % "2.3.1"
+libraryDependencies += "com.squareup.okhttp" % "okhttp" % "2.4.0"
