@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<title>Sender Push Notification</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+	<div class="container">
+		<h1>GCM Sender</h1>
+		<div>
+			<label for="api_key">API KEY</label> <input type="text"
+				name="api_key" id="api_key" />
+		</div>
+		<div>
+			<label for="reg_id">Registration ID</label> <input type="text"
+				name="reg_id" id="reg_id" />
+		</div>
+		<div>
+			<label for="titulo">Título</label> <input type="text" name="titulo"
+				id="titulo" />
+		</div>
+		<div>
+			<label for="mensagem">Mensagem</label> <input type="text"
+				name="mensagem" id="mensagem" />
+		</div>
+		<div>
+			<button id="submit" type="button">Enviar</button>
+		</div>
+		<br />
+		<div id="result"></div>
+
+	</div>
+
+	<script src='@routes.Assets.versioned("javascripts/jquery-2.1.4.min.js")'></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<script>
+		$(document).ready(function() {
+
+			$("#submit").click(function() {
+
+				// Get some values from elements on the page:
+				var key = $("#api_key").val();
+				var reg = $("#reg_id").val();
+				var title = $("#titulo").val();
+				var message = $("#mensagem").val();
+
+				// Send the data using post
+				var posting = $.post('SenderGcmServlet', {
+					api_key : key,
+					reg_id : reg,
+					titulo : title,
+					mensagem : message
+				});
+				// Put the results in a div
+				posting.done(function(data) {
+					$("#result").empty().append(data);
+				});
+			});
+		});
+	</script>
+</body>
+</html>
