@@ -4,22 +4,22 @@ import static play.data.Form.form;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import models.Payload;
 import models.PushMessage;
+import play.Logger;
+import play.data.DynamicForm;
+import play.mvc.Controller;
+import play.mvc.Result;
+import utils.Constants;
 
 import com.google.gson.Gson;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
-
-import play.data.DynamicForm;
-import play.mvc.Controller;
-import play.mvc.Result;
-import utils.Constants;
-import views.html.*;
 
 public class GCM extends Controller {
 
@@ -31,17 +31,23 @@ public class GCM extends Controller {
 
 		DynamicForm dynamicForm = form().bindFromRequest();
 		List<String> regIds = new ArrayList<>();
+		Map<String, String> campos = new HashMap<>();
 
 		regIds.add(dynamicForm.get("reg_id"));
 
-		Payload payload = new Payload(dynamicForm.get("titulo"),
-				dynamicForm.get("mensagem"));
-		PushMessage push = new PushMessage(null, null, regIds, payload, null);
+		campos.put(dynamicForm.get("lbl_campo1"), dynamicForm.get("txt_campo1"));
+		campos.put(dynamicForm.get("lbl_campo2"), dynamicForm.get("txt_campo2"));
+		campos.put(dynamicForm.get("lbl_campo3"), dynamicForm.get("txt_campo3"));
+
+		PushMessage push = new PushMessage(null, null, regIds, campos, null);
+
 		Gson gson = new Gson();
 
 		OkHttpClient client = new OkHttpClient();
 		String json = gson.toJson(push, PushMessage.class);
 		RequestBody body = RequestBody.create(Constants.JSON, json);
+
+		Logger.debug(json);
 
 		Request requestOkHttp;
 		requestOkHttp = new Request.Builder()
@@ -65,7 +71,7 @@ public class GCM extends Controller {
 			sb.append(responseOkHttp.body().string());
 
 		} catch (IOException ioE) {
-			sb.append("Deu algum erro de montar a mensagem.");
+			sb.append("Deu algum erro ao montar a mensagem.");
 		}
 
 		return ok(sb.toString());

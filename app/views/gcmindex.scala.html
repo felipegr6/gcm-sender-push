@@ -17,14 +17,30 @@
 			<label for="reg_id">Registration ID</label> <input type="text"
 				name="reg_id" id="reg_id" />
 		</div>
+
 		<div>
-			<label for="titulo">Título</label> <input type="text" name="titulo"
-				id="titulo" />
+			<div>
+				<input type="text" name="lbl_campo1" id="lbl_campo1"
+					placeholder="Campo 1" /> <input type="text" name="txt_campo1"
+					id="txt_campo1" placeholder="Valor do Campo 1" />
+			</div>
+
+			<div>
+				<input type="text" name="lbl_campo2" id="lbl_campo2"
+					placeholder="Campo 2" /> <input type="text" name="txt_campo2"
+					id="txt_campo2" placeholder="Valor do Campo 2" />
+			</div>
+
+			<div>
+				<input type="text" name="lbl_campo3" id="lbl_campo3"
+					placeholder="Campo 3" /> <input type="text" name="txt_campo3"
+					id="txt_campo3" placeholder="Valor do Campo 3" />
+			</div>
+
 		</div>
-		<div>
-			<label for="mensagem">Mensagem</label> <input type="text"
-				name="mensagem" id="mensagem" />
-		</div>
+
+		<br />
+
 		<div>
 			<button id="submit" type="button">Enviar</button>
 		</div>
@@ -33,7 +49,8 @@
 
 	</div>
 
-	<script src='@routes.Assets.versioned("javascripts/jquery-2.1.4.min.js")'></script>
+	<script
+		src='@routes.Assets.versioned("javascripts/jquery-2.1.4.min.js")'></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 	<script>
@@ -44,15 +61,23 @@
 				// Get some values from elements on the page:
 				var key = $("#api_key").val();
 				var reg = $("#reg_id").val();
-				var title = $("#titulo").val();
-				var message = $("#mensagem").val();
+				var lCampo1 = $("#lbl_campo1").val();
+				var tCampo1 = $("#txt_campo1").val();
+				var lCampo2 = $("#lbl_campo2").val();
+				var tCampo2 = $("#txt_campo2").val();
+				var lCampo3 = $("#lbl_campo3").val();
+				var tCampo3 = $("#txt_campo4").val();
 
 				// Send the data using post
 				var posting = $.post('@routes.GCM.submit()', {
 					api_key : key,
 					reg_id : reg,
-					titulo : title,
-					mensagem : message
+					lbl_campo1 : lCampo1,
+					txt_campo1 : tCampo1,
+					lbl_campo2 : lCampo2,
+					txt_campo2 : tCampo2,
+					lbl_campo3 : lCampo3,
+					txt_campo3 : tCampo3
 				});
 				// Put the results in a div
 				posting.done(function(data) {
