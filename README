@@ -1,4 +1,6 @@
-This is your new Play application
+Sender Push Notification
 =================================
 
-This file will be packaged with your application, when using `activator dist`.
+Função: enviar push notifications para aparelhos cadastrados no Google Cloud Messaging (GCM) através dos apps.
+Desenvolvido: Java/Scala com Play! Framework 2.4.
+Próximas releases: integração com o ecossistema iOS.
