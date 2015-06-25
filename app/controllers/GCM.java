@@ -21,6 +21,8 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 
+import views.*;
+
 public class GCM extends Controller {
 
 	public Result index() {
